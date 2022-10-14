@@ -131,7 +131,7 @@ func appendToFile(str string) {
 }
 
 func bulkInsert(b []byte) {
-	req, err := http.NewRequest("POST", "http://localhost:4080/api/_bulk", strings.NewReader(string(b)))
+	req, err := http.NewRequest("POST", fmt.Sprintf(`%s/api/_bulk`, os.Getenv("ZINC_URL")), strings.NewReader(string(b)))
 	if err != nil {
 		println(err)
 		return
@@ -155,7 +155,7 @@ func createIndex() {
 		println(err)
 		return
 	}
-	req, err := http.NewRequest("POST", "http://localhost:4080/api/index", strings.NewReader(string(b)))
+	req, err := http.NewRequest("POST", fmt.Sprintf(`%s/api/index`, os.Getenv("ZINC_URL")), strings.NewReader(string(b)))
 	if err != nil {
 		println(err)
 		return
